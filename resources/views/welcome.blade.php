@@ -9,14 +9,17 @@
         <!-- Fonts -->
         <link href="https://fonts.googleapis.com/css?family=Nunito:200,600" rel="stylesheet">
 
-        <script src="{{ asset('/js/app.js') }}" defer></script>
-        <!-- Styles -->
+     
+       
        <!-- Styles -->
     <link href="{{ asset('css/app.css') }}" rel="stylesheet">
     </head>
     <body>
         <div id="app">
-               <example-component></example-component>
+         <navbar-components></navbar-components>
+              <router-view></router-view>
+       
         </div>
+           <script src="{{ asset('/js/app.js') }}" defer></script>
     </body>
 </html>
