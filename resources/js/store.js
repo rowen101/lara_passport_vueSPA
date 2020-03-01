@@ -2,7 +2,7 @@ import Vue from "vue";
 import Vuex from "vuex";
 import axios from "axios";
 import api from "./services/api";
-// import createPersistedState from "vuex-persistedstate";
+import createPersistedState from "vuex-persistedstate";
 import miniToastr from "mini-toastr";
 
 miniToastr.init();
@@ -14,16 +14,17 @@ export default new Vuex.Store({
     user: "",
     id: ""
   },
-  // plugins:[createPersistedState()],
+  plugins:[createPersistedState()],
   mutations: {
     auth_request(state) {
       state.status = "loading";
     },
-    auth_success(state, data) {
+    auth_success(state, token) {
       state.status = "success";
-      state.token = data.token;
-      state.user = data.name;
-      state.id = data.id;
+      state.token = token;
+    },
+    auth_user(state, id){
+      state.id = id
     },
     auth_error(state) {
       state.status = "error";
@@ -36,6 +37,8 @@ export default new Vuex.Store({
     },
     destroyToken(state) {
       state.token = null
+      state.status = ""
+      state.id =""
     }
   },
   actions: {
@@ -54,9 +57,11 @@ export default new Vuex.Store({
             console.log(resp.data)
             const token = resp.data.data.token;
            
-            const data = resp.data.data;
+           
+            const id = resp.data.data.id;
             localStorage.setItem('token', token)
-            commit('auth_success', data)
+            commit('auth_success', token)
+            commit('auth_user', id)
             resolve(resp)
           })
           .catch(err => {
@@ -67,13 +72,19 @@ export default new Vuex.Store({
           });
       });
     },
-    destroyToken(context) {
-      if (context.getters.isLoggedIn) {
+    destroyToken(context, userparam) {
+     
         return new Promise((resolve, reject) => {
-          axios.post('logout')
+          axios({
+            url:api.baseURL + 'logout',
+            data:userparam,
+            method:'Post'
+          })
             .then(response => {
               localStorage.removeItem('token')
               context.commit('destroyToken')
+              delete axios.defaults.headers.common["Authorization"];
+             
               resolve(response)
             })
             .catch(error => {
@@ -82,13 +93,14 @@ export default new Vuex.Store({
               reject(error)
             })
         })
-      }
+      
     }
   },
   getters: {
-    isLoggedIn(state) {
-      return state.token != null
-    },
+    // isLoggedIn(state) {
+    //   return state.token != null
+    // },
+    isLoggedIn: state => state.token,
     authStatus: state => state.status,
     token: state => state.token,
   }

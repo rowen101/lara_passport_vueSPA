@@ -16,8 +16,8 @@
     </head>
     <body>
         <div id="app">
-         <navbar-components></navbar-components>
-              <router-view></router-view>
+       
+           
        
         </div>
            <script src="{{ asset('/js/app.js') }}" defer></script>

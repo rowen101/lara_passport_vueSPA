@@ -1,74 +1,26 @@
 <template>
-  <div class="app flex-row align-items-center">
-    <div class="container">
-      <b-row class="justify-content-center loginForm">
-        <div class="form-elegant">
-          <div class="card border-none">
-            <div class="card-body mx-4">
-              <b-form>
-                <div class="md-form">
-                  <b-input-group class="mb-3">
-                   
-                    <b-form-input
-                      type="text"
-                      v-model="email"
-                      class="form-control"
-                      placeholder="Username"
-                      autocomplete="username email"
-                     
-                    />
-                  </b-input-group>
-                </div>
-
-                <div class="md-form pb-3 password">
-                  <b-input-group class="mb-4">
-                  
-                    <b-form-input
-                      type="password"
-                      class="form-control"
-                      placeholder="Password"
-                      autocomplete="current-password"
-                      v-model="password"
-                    />
-                  </b-input-group>
-
-                 
-                  <p class="font-small blue-text d-flex justify-content-end">
-                    <router-link :to="'#'">Forgot Password?</router-link>
-                  </p>
-                </div>
-
-                <div class="row d-flex align-items-center mb-4">
-                  <!--Grid column-->
-                  <div class="text-center mb-3 col-md-12">
-                    <b-button
-                      variant="primary"
-                      class="btn btn-primary btn-block btn-rounded z-depth-1 waves-effect waves-light ng-hide"
-                     @click="login()"
-                    >Login</b-button>
-                  </div>
-                  <!--Grid column-->
-                </div>
-              </b-form>
-            </div>
-
-            <!--Footer-->
-            <div class="modal-footer mx-5 pt-3 mb-1">
-              <p class="font-small grey-text d-flex justify-content-end">
-                Not yet register?
-                <router-link :to="'/register'">Request</router-link>
-              </p>
-            </div>
-          </div>
+  <div class="login-form">
+    <form>
+        <h2 class="text-center">Log in</h2>       
+        <div class="form-group">
+            <input type="text" v-model="email" class="form-control" placeholder="Email" required="required">
         </div>
-      </b-row>
-    </div>
-  </div>
+        <div class="form-group">
+            <input type="password" v-model="password" class="form-control" placeholder="Password" required="required">
+        </div>
+        <div class="form-group">
+            <button type="submit" @click="login()" class="btn btn-primary btn-block">Log in</button>
+        </div>
+        <div class="clearfix">
+            <label class="pull-left checkbox-inline"><input type="checkbox"> Remember me</label>
+            <a href="#" class="pull-right">Forgot Password?</a>
+        </div>        
+    </form>
+    <p class="text-center"><a href="#">Create an Account</a></p>
+</div>
 </template>
 <script>
-// import api from '../services/api'
-//  import  router  from "../../router";
-// import EventBus from '../components/EventBus'
+
 import miniToastr from "mini-toastr";
 miniToastr.init();
 export default {
@@ -86,7 +38,7 @@ export default {
               .then(resp => {
                 console.log(resp);
               //router.push({name: 'Profile'})
-               this.$router.push({ name: 'Profile'})
+               this.$router.push({ name: 'Home'})
               })
                 .catch(err => {
                 miniToastr.error("Login Failed");
@@ -99,3 +51,26 @@ export default {
    
 }
 </script>
+<style>
+.login-form {
+		width: 340px;
+    	margin: 50px auto;
+	}
+    .login-form form {
+    	margin-bottom: 15px;
+        background: #f7f7f7;
+        box-shadow: 0px 2px 2px rgba(0, 0, 0, 0.3);
+        padding: 30px;
+    }
+    .login-form h2 {
+        margin: 0 0 15px;
+    }
+    .form-control, .btn {
+        min-height: 38px;
+        border-radius: 2px;
+    }
+    .btn {        
+        font-size: 15px;
+        font-weight: bold;
+    }
+</style>

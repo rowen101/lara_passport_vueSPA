@@ -32,18 +32,44 @@ import Axios from "axios";
 import { BootstrapVue, IconsPlugin } from 'bootstrap-vue'
 import 'bootstrap/dist/css/bootstrap.css'
 import 'bootstrap-vue/dist/bootstrap-vue.css'
-import Navbar from './components/Navbar'
+import Master from './components/layouts/Master'
+
 // Install BootstrapVue
 Vue.use(BootstrapVue)
 // Optionally install the BootstrapVue icon components plugin
 Vue.use(IconsPlugin)
 
 Vue.prototype.$http = Axios;
+
+router.beforeEach((to, from, next) => {
+    if (to.matched.some(record => record.meta.requiresAuth)) {
+      console.log(store.getters.isLoggedIn);
+      if (!store.getters.isLoggedIn) {
+        next({
+          name: "Login",
+        })
+      } else {
+        next()
+      }
+    } else if (to.matched.some(record => record.meta.requiresVisitor)) {
+      console.log(store.getters.isLoggedIn);
+      if (store.getters.isLoggedIn) {
+        next({
+          name: "Home",
+        })
+      } else {
+        next()
+      }
+    } {
+      next()
+    }
+  });
 const app = new Vue({
     el: '#app',
     router,
     store,
     components:{
-        "navbar-components": Navbar
-    }
+        Master,
+
+    },template: '<Master/>'
 });

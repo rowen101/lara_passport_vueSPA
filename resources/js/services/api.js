@@ -1,7 +1,7 @@
 import axios from "axios";
 import miniToastr from "mini-toastr";
 miniToastr.init();
-const baseURL = "http://127.0.0.1:8000/api/"; //local development
+const baseURL = "http://laradmin.test/api/"; //local development
 //const baseURL = "http://127.0.0.1:8000/api/"; //production
 
 const instance = axios.create({

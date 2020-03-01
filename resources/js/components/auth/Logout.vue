@@ -6,7 +6,7 @@ export default {
     created(){
         this.$store.dispatch('destroyToken')
         .then(response => {
-            this.$router.push({name: 'Login', response})
+            this.$router.push({path: '/Login'})
         })
     },
     data(){
