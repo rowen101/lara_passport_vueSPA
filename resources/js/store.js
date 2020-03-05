@@ -11,7 +11,7 @@ export default new Vuex.Store({
   state: {
     status: "",
     token: localStorage.getItem('token') || null,
-    user: "",
+    
     id: ""
   },
   plugins:[createPersistedState()],
@@ -51,8 +51,15 @@ export default new Vuex.Store({
           data: userparam,
           method: "POST"
         })
+
+          
           .then(resp => {
+
             //authenticate
+            axios.defaults.headers.common["Authorization"] =
+              " Basic " + resp.data.data.token;
+
+              //authorize
 
             console.log(resp.data)
             const token = resp.data.data.token;

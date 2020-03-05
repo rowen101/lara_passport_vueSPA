@@ -1959,12 +1959,9 @@ __webpack_require__.r(__webpack_exports__);
   },
   methods: {
     getUser: function getUser() {
-      return _services_api__WEBPACK_IMPORTED_MODULE_0__["default"].instance.get('profile', {
-        headers: {
-          Authorization: "Bearer ".concat(localStorage.usertoken)
-        }
-      }).then(function (res) {
+      return _services_api__WEBPACK_IMPORTED_MODULE_0__["default"].instance.get("profile?id=" + this.$store.state.id, {}).then(function (res) {
         return res.data;
+        console.log(res);
       })["catch"](function (error) {
         console.log(error);
       });
@@ -2189,6 +2186,7 @@ __webpack_require__.r(__webpack_exports__);
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
+//
 //
 //
 //
@@ -76276,7 +76274,16 @@ var render = function() {
       _vm._m(0)
     ]),
     _vm._v(" "),
-    _vm._m(1)
+    _c(
+      "p",
+      { staticClass: "text-center" },
+      [
+        _c("router-link", { attrs: { to: { name: "Register" } } }, [
+          _vm._v("Create an Account")
+        ])
+      ],
+      1
+    )
   ])
 }
 var staticRenderFns = [
@@ -76293,14 +76300,6 @@ var staticRenderFns = [
       _c("a", { staticClass: "pull-right", attrs: { href: "#" } }, [
         _vm._v("Forgot Password?")
       ])
-    ])
-  },
-  function() {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c("p", { staticClass: "text-center" }, [
-      _c("a", { attrs: { href: "#" } }, [_vm._v("Create an Account")])
     ])
   }
 ]
@@ -76552,120 +76551,114 @@ var render = function() {
     "div",
     { attrs: { id: "app" } },
     [
-      _c(
-        "nav",
-        { staticClass: "navbar navbar-expand-lg navbar-dark bg-dark" },
-        [
-          _c("a", { staticClass: "navbar-brand", attrs: { href: "#" } }, [
-            _vm._v("Navbar")
-          ]),
-          _vm._v(" "),
-          _vm._m(0),
-          _vm._v(" "),
-          _c(
-            "div",
-            {
-              staticClass: "collapse navbar-collapse",
-              attrs: { id: "navbarSupportedContent" }
-            },
+      _vm.loggedIn
+        ? _c(
+            "nav",
+            { staticClass: "navbar navbar-expand-lg navbar-dark bg-dark" },
             [
-              _c("ul", { staticClass: "navbar-nav mr-auto" }, [
-                _vm.loggedIn
-                  ? _c(
-                      "li",
-                      { staticClass: "nav-tem" },
-                      [
-                        _c(
-                          "router-link",
-                          {
-                            staticClass: "nav-link",
-                            attrs: { to: { name: "Home" } }
-                          },
-                          [_vm._v("Home")]
-                        )
-                      ],
-                      1
-                    )
-                  : _vm._e(),
-                _vm._v(" "),
-                _vm.loggedIn
-                  ? _c(
-                      "li",
-                      { staticClass: "nav-tem" },
-                      [
-                        _c(
-                          "router-link",
-                          {
-                            staticClass: "nav-link",
-                            attrs: { to: { name: "Profile" } }
-                          },
-                          [_vm._v("Profile")]
-                        )
-                      ],
-                      1
-                    )
-                  : _vm._e(),
-                _vm._v(" "),
-                !_vm.loggedIn
-                  ? _c(
-                      "li",
-                      { staticClass: "nav-tem" },
-                      [
-                        _c(
-                          "router-link",
-                          {
-                            staticClass: "nav-link",
-                            attrs: { to: { name: "Login" } }
-                          },
-                          [_vm._v("Login")]
-                        )
-                      ],
-                      1
-                    )
-                  : _vm._e(),
-                _vm._v(" "),
-                !_vm.loggedIn
-                  ? _c(
-                      "li",
-                      { staticClass: "nav-tem" },
-                      [
-                        _c(
-                          "router-link",
-                          {
-                            staticClass: "nav-link",
-                            attrs: { to: { name: "Register" } }
-                          },
-                          [_vm._v("Register")]
-                        )
-                      ],
-                      1
-                    )
-                  : _vm._e(),
-                _vm._v(" "),
-                _vm.loggedIn
-                  ? _c(
-                      "li",
-                      { staticClass: "nav-tem" },
-                      [
-                        _c(
-                          "router-link",
-                          {
-                            staticClass: "nav-link",
-                            attrs: { to: { name: "Logout" } }
-                          },
-                          [_vm._v("Logout")]
-                        )
-                      ],
-                      1
-                    )
-                  : _vm._e()
+              _c("a", { staticClass: "navbar-brand", attrs: { href: "#" } }, [
+                _vm._v("Navbar")
               ]),
               _vm._v(" "),
-              _vm._m(1)
+              _vm._m(0),
+              _vm._v(" "),
+              _c(
+                "div",
+                {
+                  staticClass: "collapse navbar-collapse",
+                  attrs: { id: "navbarSupportedContent" }
+                },
+                [
+                  _c("ul", { staticClass: "navbar-nav mr-auto" }, [
+                    _vm.loggedIn
+                      ? _c(
+                          "li",
+                          { staticClass: "nav-tem" },
+                          [
+                            _c(
+                              "router-link",
+                              {
+                                staticClass: "nav-link",
+                                attrs: { to: { name: "Home" } }
+                              },
+                              [_vm._v("Home")]
+                            )
+                          ],
+                          1
+                        )
+                      : _vm._e(),
+                    _vm._v(" "),
+                    _vm.loggedIn
+                      ? _c(
+                          "li",
+                          { staticClass: "nav-tem" },
+                          [
+                            _c(
+                              "router-link",
+                              {
+                                staticClass: "nav-link",
+                                attrs: { to: { name: "Profile" } }
+                              },
+                              [_vm._v("Profile")]
+                            )
+                          ],
+                          1
+                        )
+                      : _vm._e(),
+                    _vm._v(" "),
+                    !_vm.loggedIn
+                      ? _c(
+                          "li",
+                          { staticClass: "nav-tem" },
+                          [
+                            _c(
+                              "router-link",
+                              {
+                                staticClass: "nav-link",
+                                attrs: { to: { name: "Login" } }
+                              },
+                              [_vm._v("Login")]
+                            )
+                          ],
+                          1
+                        )
+                      : _vm._e(),
+                    _vm._v(" "),
+                    !_vm.loggedIn
+                      ? _c(
+                          "li",
+                          { staticClass: "nav-tem" },
+                          [
+                            _c(
+                              "router-link",
+                              {
+                                staticClass: "nav-link",
+                                attrs: { to: { name: "Register" } }
+                              },
+                              [_vm._v("Register")]
+                            )
+                          ],
+                          1
+                        )
+                      : _vm._e()
+                  ]),
+                  _vm._v(" "),
+                  _vm.loggedIn
+                    ? _c(
+                        "router-link",
+                        {
+                          staticClass: "btn btn-outline-success my-2 my-sm-0",
+                          attrs: { to: { name: "Logout" } }
+                        },
+                        [_vm._v("Logout")]
+                      )
+                    : _vm._e()
+                ],
+                1
+              )
             ]
           )
-        ]
-      ),
+        : _vm._e(),
       _vm._v(" "),
       _c("router-view")
     ],
@@ -76692,26 +76685,6 @@ var staticRenderFns = [
       },
       [_c("span", { staticClass: "navbar-toggler-icon" })]
     )
-  },
-  function() {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c("form", { staticClass: "form-inline my-2 my-lg-0" }, [
-      _c("input", {
-        staticClass: "form-control mr-sm-2",
-        attrs: { type: "search", placeholder: "Search", "aria-label": "Search" }
-      }),
-      _vm._v(" "),
-      _c(
-        "button",
-        {
-          staticClass: "btn btn-outline-success my-2 my-sm-0",
-          attrs: { type: "submit" }
-        },
-        [_vm._v("Search")]
-      )
-    ])
   }
 ]
 render._withStripped = true
@@ -93661,7 +93634,7 @@ function () {
         switch (_context.prev = _context.next) {
           case 0:
             _context.next = 2;
-            return localStorage.getItem("userToken");
+            return localStorage.getItem("token");
 
           case 2:
             userToken = _context.sent;
@@ -93738,7 +93711,6 @@ vue__WEBPACK_IMPORTED_MODULE_0___default.a.use(vuex__WEBPACK_IMPORTED_MODULE_1__
   state: {
     status: "",
     token: localStorage.getItem('token') || null,
-    user: "",
     id: ""
   },
   plugins: [Object(vuex_persistedstate__WEBPACK_IMPORTED_MODULE_4__["default"])()],
@@ -93779,6 +93751,8 @@ vue__WEBPACK_IMPORTED_MODULE_0___default.a.use(vuex__WEBPACK_IMPORTED_MODULE_1__
           method: "POST"
         }).then(function (resp) {
           //authenticate
+          axios__WEBPACK_IMPORTED_MODULE_2___default.a.defaults.headers.common["Authorization"] = " Basic " + resp.data.data.token; //authorize
+
           console.log(resp.data);
           var token = resp.data.data.token;
           var id = resp.data.data.id;

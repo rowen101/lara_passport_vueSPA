@@ -1,6 +1,6 @@
 <template>
   <div id="app">
-    <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+    <nav v-if="loggedIn" class="navbar navbar-expand-lg navbar-dark bg-dark">
       <a class="navbar-brand" href="#">Navbar</a>
       <button
         class="navbar-toggler"
@@ -29,11 +29,9 @@
           <li v-if="!loggedIn" class="nav-tem">
             <router-link class="nav-link" :to="{ name: 'Register'}">Register</router-link>
           </li>
-          <li v-if="loggedIn" class="nav-tem">
-            <router-link class="nav-link" :to="{ name: 'Logout'}">Logout</router-link>
-          </li>
+         
         </ul>
-        <form class="form-inline my-2 my-lg-0">
+        <!-- <form class="form-inline my-2 my-lg-0">
           <input
             class="form-control mr-sm-2"
             type="search"
@@ -41,7 +39,10 @@
             aria-label="Search"
           />
           <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
-        </form>
+        </form> -->
+      
+            <router-link v-if="loggedIn" class="btn btn-outline-success my-2 my-sm-0" :to="{ name: 'Logout'}">Logout</router-link>
+         
       </div>
     </nav>
     <router-view></router-view>

@@ -35,13 +35,12 @@ export default {
     },
     methods:{
         getUser(){
-            return api.instance.get('profile',{
-                headers:{
-                    Authorization: `Bearer ${localStorage.usertoken}`
-                }
+            return api.instance.get("profile?id=" + this.$store.state.id,{
+                
             })
             .then(res => {
                 return res.data
+                console.log(res);
             })
             .catch(error => {
                 console.log(error) 

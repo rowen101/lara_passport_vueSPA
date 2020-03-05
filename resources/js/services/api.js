@@ -13,7 +13,7 @@ const instance = axios.create({
 
 instance.interceptors.request.use(
   async config => {
-    const userToken = await localStorage.getItem("userToken");
+    const userToken = await localStorage.getItem("token");
 
 
     if (userToken != null) {

@@ -17,4 +17,6 @@ Route::post('login', 'API\RegisterController@login');
 Route::middleware('auth:api')->post('/logout','API\RegisterController@logout');
 Route::middleware('auth:api')->get('/user', function (Request $request) {
     Route::resource('products', 'API\ProductController');
+    Route::resource('profile','ProfileController');
+    
 });
